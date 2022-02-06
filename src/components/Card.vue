@@ -1,5 +1,5 @@
 <script setup>
-import DepthIndicator from './DepthIndicator.vue';
+import DepthIndicator from '@/components/DepthIndicator.vue';
 import CardButtonSet from './CardButtonSet.vue';
   defineProps({
     agenda: {

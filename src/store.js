@@ -6,6 +6,9 @@ export default createStore({
       user: null,
       agendas: [],
       users: [],
+
+      agendaDataInitiated: false,
+      userDataInitiated: false,
     }
   },
   mutations: {

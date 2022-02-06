@@ -34,7 +34,10 @@ export function ref(path) {
 
 export function push(path, data) {
   let newKey = _push(child(_ref(db), path)).key
+  console.log(newKey)
   set(ref(`${path}/${newKey}`), data)
+  
+  return newKey
 }
 
 export const set = _set

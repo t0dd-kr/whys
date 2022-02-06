@@ -4,6 +4,10 @@
       type: Boolean,
       default: false,
     },
+    onClick: {
+      type: Function,
+      default: () => {},
+    },
   })
 </script>
 
@@ -13,7 +17,8 @@
       'bg-primary': !disabled,
       'bg-gray-400': disabled,
     }]"
-    @click="$emit('click')">
+    @click="onClick"
+  >
     <slot></slot>
   </div>
 </template>
