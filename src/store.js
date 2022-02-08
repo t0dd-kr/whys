@@ -7,6 +7,8 @@ export default createStore({
       agendas: [],
       users: [],
 
+      currentVotingAgenda: null,
+
       agendaDataInitiated: false,
       userDataInitiated: false,
     }

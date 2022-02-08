@@ -3,9 +3,9 @@ import App from '@/App.vue'
 import '@/assets/css/index.css'
 import store from '@/store'
 import router from '@/router'
-import { ref, onValue, set, push } from '@/firebase'
+import { onValue, set, push } from '@/firebase'
 
-onValue(ref('/agendas/'), snapshot => {
+onValue('/agendas', snapshot => {
   store.state.agendas = Object.keys(snapshot.val() || [])
   .map(key => {
     return {
@@ -24,9 +24,12 @@ onValue(ref('/agendas/'), snapshot => {
     }
   })
   store.state.agendaDataInitiated = true
+  store.state.currentVotingAgenda = store.state.agendas.find(agenda => {
+    return true
+  })
 })
 
-onValue(ref('/users/'), snapshot => {
+onValue('/users', snapshot => {
   store.state.users = Object.keys(snapshot.val() || []).map(key => {
     return {
       ...snapshot.val()[key],

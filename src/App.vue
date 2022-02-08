@@ -41,7 +41,8 @@
   }
 
   .bg-primary {
-    background-color: var(--primary);
+    background-color: rgb(117 217 101 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 1;
   }
   
   .border-primary {
@@ -50,5 +51,18 @@
 
   .text-primary {
     color: var(--primary);
+  }
+
+  .bg-branch {
+    background-color: rgb(255 212 102 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 1;
+  }
+  
+  .border-branch {
+    border-color: var(--branch);
+  }
+
+  .text-branch {
+    color: var(--branch);
   }
 </style>

@@ -28,18 +28,23 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase(app);
 
-export function ref(path) {
+function ref(path) {
   return _ref(db, path);
 }
 
+export function set(path, data) {
+  _set(ref(path), data)
+}
+
 export function push(path, data) {
-  let newKey = _push(child(_ref(db), path)).key
-  console.log(newKey)
-  set(ref(`${path}/${newKey}`), data)
+  let newKey = _push(child(ref(), path)).key
+
+  set(`${path}/${newKey}`, data)
   
   return newKey
 }
 
-export const set = _set
-export const onValue = _onValue
+export function onValue(path, callback) {
+  _onValue(ref(path), callback)
+}
 

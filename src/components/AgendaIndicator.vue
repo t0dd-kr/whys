@@ -42,11 +42,4 @@
       fill-opacity: 1;
     }
   }
-  .like {
-    &:hover {
-    .heart {
-      fill-opacity: .5;
-    }
-  }
-}  
 </style>

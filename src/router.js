@@ -12,6 +12,9 @@ const router = createRouter({
   }, {
     path: '/new',
     component: () => import("@/views/New.vue")
+  }, {
+    path: '/reason/new/:agendaId',
+    component: () => import("@/views/Reason/New.vue")
   },]
 })
 

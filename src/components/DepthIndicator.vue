@@ -12,11 +12,14 @@
 </script>
 
 <template>
-  <div class="flex gap-2">
-    <div :class="[`border-2 w-[10px] h-[10px] rounded-full transition-all`, {
+  <div class="flex gap-1 items-end">
+    <div :class="[`border-2 w-[8px] rounded transition-all`, {
       'border-white': current !== i,
       'active': current === i,
-    }]" v-for="i in total"></div>
+    }]"
+    :style="{
+      height: `${(total - i) * 4 + 8}px`,
+    }" v-for="i in total"></div>
   </div>
 </template>
 
