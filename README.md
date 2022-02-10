@@ -1,7 +1,9 @@
-# Vue 3 + Vite
+# Whys
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+![image](https://user-images.githubusercontent.com/28590190/153340869-5270f3e3-e8d8-4aca-8445-91bde74665fc.png)
 
-## Recommended IDE Setup
+This project is a brainstorming project inspired by the 5Whys technique as a tool to recognize problems with certain phenomena.
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+## Guide
+
+You must setup the firebase project for Real Database. And setup the `.env` file from `.env.sample` for run this project.
