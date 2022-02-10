@@ -29,12 +29,16 @@
       return store.state.agendas.find(a => a.id === e)
     })
   })
+
+  function selectReason(reason) {
+    store.commit('setNextCurrentVotingAgenda')
+  }
 </script>
 
 <template>
-  <div class="flex flex-col bg-[#eee] bg-opacity-10 text-white rounded-lg p-4 gap-4 w-[800px]">
+  <div class="flex flex-col bg-[#eee] bg-opacity-10 text-white rounded-lg p-4 gap-2 w-[800px]">
     <DepthIndicator :current="agenda.depth"/>
-    <div class="font-extrabold text-2xl mb-2">
+    <div class="font-extrabold text-2xl">
       {{ agenda.title }}
     </div>
     <div class="text-sm">
@@ -44,7 +48,7 @@
       {{ agenda.author }}
     </div>
     <div class="flex flex-col gap-4">
-      <ReasonCard :agenda="child" v-for="child in children"></ReasonCard>
+      <ReasonCard :agenda="child" v-for="child in children" @like="selectReason"/>
       <div class="flex justify-between items-center">
         <div class="font-extrabold text-lg" v-if="children.length > 0">
           Write another reason for this agenda.

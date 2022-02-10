@@ -18,7 +18,7 @@
       'active': current === i,
     }]"
     :style="{
-      height: `${(total - i) * 4 + 8}px`,
+      height: `${i * 2 + 6}px`,
     }" v-for="i in total"></div>
   </div>
 </template>

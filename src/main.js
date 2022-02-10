@@ -24,9 +24,7 @@ onValue('/agendas', snapshot => {
     }
   })
   store.state.agendaDataInitiated = true
-  store.state.currentVotingAgenda = store.state.agendas.find(agenda => {
-    return true
-  })
+  store.commit('setNextCurrentVotingAgenda')
 })
 
 onValue('/users', snapshot => {

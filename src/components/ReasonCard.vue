@@ -1,15 +1,34 @@
 <script setup>
-  import DepthIndicator from '@/components/DepthIndicator.vue';
   import LikeButton from '@/components/LikeButton.vue';
-  import { ref } from 'vue'
-  defineProps({
+  import { onValue, set, push } from '@/firebase'
+  import { useStore } from 'vuex'
+
+  const store = useStore()
+
+  const props = defineProps({
     agenda: {
       type: Object,
       required: true,
     }
   })
 
-  let like = ref(false)
+  let emit = defineEmits(['like'])
+
+  function toggleLike() {
+    if(props.agenda.likeUserIds.includes(store.state.user.id)) {
+      set('/agendas/' + props.agenda.id, {
+        ...props.agenda,
+        likeUserIds: props.agenda.likeUserIds.filter(e => e !== store.state.user.id)
+      })
+      emit('like', false, props.agenda)
+    } else {
+        set('/agendas/' + props.agenda.id, {
+        ...props.agenda,
+        likeUserIds: [ ...props.agenda.likeUserIds, store.state.user.id ].filter((e, i, a) => a.indexOf(e) === i)
+      })
+      emit('like', true, props.agenda)
+    }
+  }
 </script>
 
 <template>
@@ -23,7 +42,7 @@
       </div>
     </div>
     <div class="flex justify-end items-end">
-      <LikeButton :active="like" @click="like = !like"/>
+      <LikeButton :active="agenda.likeUserIds.includes($store.state.user.id)" @click="toggleLike"/>
       <!-- $store.state.user && agenda.likeUserIds.includes($store.state.user.id) -->
     </div>
   </div>
