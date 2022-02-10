@@ -1,15 +1,11 @@
 <script setup>
-  import IndicatorDepth from '@/components/Indicator/Depth.vue';
-  import Button from '@/components/Button.vue';
   import AgendaCard from '@/components/AgendaCard.vue';
+  import NewAgenda from '@/components/NewAgenda.vue';
 
-  import { computed, ref } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { computed } from 'vue'
+  import { useRoute } from 'vue-router'
   import { useStore } from 'vuex'
-  import { push, set } from '@/firebase'
-import NewAgenda from '../../components/NewAgenda.vue';
   
-  const router = useRouter()
   const route = useRoute()
   const store = useStore()
 

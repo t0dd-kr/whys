@@ -34,7 +34,7 @@
         Write a reason for this agenda.
       </div>
       <div class="flex gap-2 mt-4">
-        <Button @click="$router.push('/reason/new/' + agenda.id)">Because</Button>
+        <Button @click="$router.push('/reason/' + agenda.id)">Because</Button>
         <Button class="bg-[#eee] bg-opacity-10 text-white" @click="$emit('select', child)">Skip</Button>
       </div>
     </div>
