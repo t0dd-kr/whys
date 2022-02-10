@@ -1,5 +1,5 @@
 <script setup>
-  import DepthIndicator from '@/components/DepthIndicator.vue';
+  import IndicatorDepth from '@/components/Indicator/Depth.vue';
   import Button from '@/components/Button.vue';
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
@@ -34,8 +34,8 @@
     <div class="flex justify-center text-white text-3xl mb-16 font-extrabold">
       Write the agenda you want to know why it is happening.
     </div>
-    <div class="flex flex-col bg-[#eee] bg-opacity-10 w-[480px] gap-4 p-4 rounded-lg">
-      <DepthIndicator/>
+    <div class="flex flex-col bg-[#eee] bg-opacity-10 w-[600px] gap-4 p-4 rounded-lg">
+      <IndicatorDepth/>
       <input
         type="text"
         class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-2xl font-extrabold"

@@ -11,27 +11,23 @@
     withIndicator: {
       type: Boolean,
       default: true,
-    },
-    withAuthor: {
-      type: Boolean,
-      default: true,
     }
   })
 </script>
 
 <template>
-  <div class="flex flex-col bg-[#eee] bg-opacity-10 text-white rounded-lg p-4 gap-2 w-[600px] relative box-border">
+  <div class="flex flex-col bg-[#eee] bg-opacity-10 text-white rounded-lg p-4 gap-2 w-[360px] h-[210px]">
     <div class="text-xs font-extrabold text-[#aaa]" v-if="agenda.depth > 1">Why?</div>
-    <div class="font-extrabold text-2xl mb-2">
+    <div class="font-extrabold text-2xl mb-2 text-ellipsis h-[64px] break-words overflow-hidden line-clamp-2">
       {{ agenda.title }}
     </div>
-    <div class="text-sm">
+    <div class="text-sm text-ellipsis h-[60px] break-words overflow-hidden line-clamp-3">
       {{ agenda.content }}
     </div>
-    <div :class="['font-bold text-right text-xs', withIndicator ? 'pb-10' : '']" v-if="withAuthor">
-      {{ $store.state.users.find(user => user.id == agenda.userId)?.nickname }}
+    <div class="font-bold text-right text-xs">
+      {{ agenda.author }}
     </div>
-    <div class="flex justify-between absolute bottom-4 w-full left-0 px-4" v-if="withIndicator">
+    <div class="flex justify-between" v-if="withIndicator">
       <IndicatorDepth :current="agenda.depth"/>
       <div class="flex justify-end gap-2" v-if="agenda.depth == 1">
         <IndicatorBranch :value="$store.state.agendas.filter(a => a.rootId == agenda.id).length"/>
@@ -46,5 +42,15 @@
 </template>
 
 <style lang="scss" scoped>
+  .text-ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
 
+  .line-clamp-2 {
+    -webkit-line-clamp: 2;
+  }
+  .line-clamp-3 {
+    -webkit-line-clamp: 2;
+  }
 </style>

@@ -50,7 +50,7 @@
   }
 
   .text-primary {
-    color: var(--primary);
+    color: var(--primary) !important;
   }
 
   .bg-branch {

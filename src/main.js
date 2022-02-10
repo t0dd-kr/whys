@@ -17,13 +17,16 @@ onValue('/agendas', snapshot => {
   .map(agenda => {
     return {
       ...agenda,
-      afterIds: agenda.afterIds || [],
-      beforeId: agenda.beforeId || null,
+      childrenIds: agenda.childrenIds || [],
+      parentId: agenda.parentId || null,
       rootId: agenda.rootId || null,
       likeUserIds: agenda.likeUserIds || [],
+      ancestorIds: agenda.ancestorIds || [],
+      descendantIds: agenda.descendantIds || [],
     }
   })
   store.state.agendaDataInitiated = true
+  store.commit('initDraftAgendas')
   store.commit('setNextCurrentVotingAgenda')
 })
 

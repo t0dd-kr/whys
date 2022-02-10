@@ -15,6 +15,12 @@ const router = createRouter({
   }, {
     path: '/reason/new/:agendaId',
     component: () => import("@/views/Reason/New.vue")
+  }, {
+    path: '/all',
+    component: () => import("@/views/All.vue")
+  }, {
+    path: '/agenda/:agendaId',
+    component: () => import("@/views/Agenda.vue")
   },]
 })
 
@@ -32,6 +38,14 @@ router.beforeEach((to, from, next) => {
       next('/')
     }
   }
+
+  if(to.path == '/') {
+    console.log(router)
+    setTimeout(() => {
+      window.scrollTo(0, window.innerHeight)
+    })
+  }
+
   next()
 })
 

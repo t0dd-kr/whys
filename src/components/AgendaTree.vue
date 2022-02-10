@@ -1,11 +1,9 @@
 <script setup>
-  import DepthIndicator from '@/components/DepthIndicator.vue';
-  import CardButtonSet from './AgendaIndicator.vue';
-  import ReasonCard from '@/components/ReasonCard.vue';
-  import Button from '@/components/Button.vue';
-
   import { useStore } from 'vuex'
-  import { computed } from 'vue'
+  import { ref, computed, watch } from 'vue'
+  
+  import AgendaCard from '@/components/AgendaCard.vue';
+  import NewAgenda from '@/components/NewAgenda.vue';
 
   const store = useStore()
 
@@ -14,53 +12,60 @@
       type: Object,
       required: true,
     },
-    showChildren: {
+    withChildren: {
       type: Boolean,
-      default: false,
+      default: true,
     },
-    showGrandChildren: {
+    withIndicator: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   })
 
-  let children = computed(() => {
-    return props.agenda.afterIds.map(e => {
-      return store.state.agendas.find(a => a.id === e)
-    })
+
+  let ancestors = computed(() => {    
+    return store.state.agendas.filter(e => e.descendantIds.includes(props.agenda.id))
   })
 
-  function selectReason(reason) {
-    store.commit('setNextCurrentVotingAgenda')
-  }
+  let descendants = computed(() => {
+    return store.state.agendas.filter(e => e.ancestorIds.includes(props.agenda.id))
+  })
+
+  let agendas = computed(() => {
+    return [...ancestors.value, props.agenda, ...(props.withChildren ? descendants.value : [])]
+  })
+
+  let depths = computed(() => {
+    let _depths = agendas.value.map(e => e.depth).filter((e, i, a) => a.indexOf(e) === i)
+
+    if(props.agenda.depth == _depths.length) {
+      return [..._depths, props.agenda.depth + 1]
+    } else {
+      return _depths
+    }
+  })
+
 </script>
 
 <template>
-  <div class="flex flex-col bg-[#eee] bg-opacity-10 text-white rounded-lg p-4 gap-2 w-[800px]">
-    <DepthIndicator :current="agenda.depth"/>
-    <div class="font-extrabold text-2xl">
-      {{ agenda.title }}
-    </div>
-    <div class="text-sm">
-      {{ agenda.content }}
-    </div>
-    <div class="font-bold text-right text-xs">
-      {{ agenda.author }}
-    </div>
-    <div class="flex flex-col gap-4">
-      <ReasonCard :agenda="child" v-for="child in children" @like="selectReason"/>
-      <div class="flex justify-between items-center">
-        <div class="font-extrabold text-lg" v-if="children.length > 0">
-          Write another reason for this agenda.
-        </div>
-        <div class="font-extrabold text-lg" v-else>
-          Write a reason for this agenda.
-        </div>
-        <Button @click="$router.push('/reason/new/' + agenda.id)">Because</Button>
+  <div class="flex flex-col w-full h-auto justify-start items-start" v-if="agenda">
+    <div :class="['p-4 overflow-auto w-full', {
+      'border-t-2': depth > 1
+    }]" v-for="depth in depths">
+      <div class="flex gap-4" :style="`width: calc(${(agendas.filter(a => a.depth == depth).length + (agenda.depth == depth - 1 ? 1 : 0)) * 360}px + ${(agendas.filter(a => a.depth == depth).length + (agenda.depth == depth - 1 ? 1 : 0)) - 1}rem)`">
+        <AgendaCard 
+          v-for="v in agendas.filter(a => a.depth == depth)" 
+          :agenda="v" 
+          :withIndicator="withIndicator"
+          :class="['w-[360px] cursor-pointer transition-all border-2', (v.id == agenda.id ? 'border-primary' : 'border-transparent')]"
+          @click.prevent="$router.push('/agenda/' + v.id)"
+        />
+        <NewAgenda :beforeAgenda="agenda" v-if="agenda.depth == depth - 1" class="w-[360px]"/>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+
 </style>

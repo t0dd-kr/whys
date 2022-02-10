@@ -9,6 +9,8 @@ export default createStore({
 
       currentVotingAgenda: null,
 
+      draftAgendas: [],
+
       agendaDataInitiated: false,
       userDataInitiated: false,
     }
@@ -17,9 +19,9 @@ export default createStore({
     setUser(state, payload) {
       state.user = payload
     }, 
-    setNextCurrentVotingAgenda(state, payload) {
+    initDraftAgendas(state, payload) {
       let rootIds = state.agendas.filter(agenda => !agenda.rootId).map(e => e.id)
-      let draftAgendas = []
+      state.draftAgendas = []
 
       for(let rootId of rootIds) {
         let agendas = [state.agendas.find(agenda => agenda.id == rootId), ...state.agendas.filter(agenda => agenda.rootId === rootId)].sort((a, b) => {
@@ -30,12 +32,12 @@ export default createStore({
           return agenda.userId == state.user.id || agenda.likeUserIds.includes(state.user.id)
         })
 
-        draftAgendas.push(interactedAgendas[0])
+        state.draftAgendas.push(interactedAgendas[0] || agendas[agendas.length - 1])
       }
-
-      state.currentVotingAgenda = draftAgendas.find((_, i) => {
-        return Math.floor(Math.random() * draftAgendas.length) == i
-      })
+    },
+    setNextCurrentVotingAgenda(state, payload) {
+      console.log(state.draftAgendas)
+      state.currentVotingAgenda = state.draftAgendas.splice(Math.floor(Math.random() * state.draftAgendas.length), 1)[0]
     }
   },
 })
