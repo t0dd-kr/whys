@@ -44,7 +44,7 @@
       {{ agenda.author }}
     </div>
     <div class="flex justify-between" v-if="withIndicator">
-      <IndicatorDepth :current="agenda.depth"/>
+      <IndicatorDepth :current="agenda.depth" :isMaximum="agenda.depth == 1" :max="Math.max(...$store.state.agendas.filter(e => e.rootId == agenda.id).map(e => e.depth), 1)"/>
       <div class="flex justify-end gap-2" v-if="agenda.depth == 1">
         <IndicatorBranch :value="$store.state.agendas.filter(a => a.rootId == agenda.id).map(e => e.childrenIds.length > 1 ? e.childrenIds.length : 0).reduce((a, b) => a + b, 0)"/>
         <IndicatorLike :value="$store.state.agendas.filter(a => a.rootId == agenda.id).map(a => a.likeUserIds.length).reduce((a, b) => a + b, 0)" :active="true"/>
