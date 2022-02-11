@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col p-8 py-24">
+  <div class="flex flex-col p-8 pt-24">
     <div class="flex justify-between items-center mb-4 fixed top-0 left-0 w-full p-4 bg-opacity-10 bg-[#eee]">
       <div class="flex gap-2">
         <div class="text-white text-sm font-extrabold bg-[#eee] bg-opacity-20 rounded p-2">
