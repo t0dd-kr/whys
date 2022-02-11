@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col bg-[#eee] bg-opacity-10 text-white rounded-lg p-4 gap-2 w-[360px] h-[210px]">
+  <div class="flex flex-col bg-[#eee] bg-opacity-10 text-white rounded-lg p-4 gap-2 w-full sm:w-[360px] h-[210px]">
     <div class="text-xs font-extrabold text-[#aaa]" v-if="agenda.depth > 1">Why?</div>
     <div class="font-extrabold text-2xl mb-2 text-ellipsis h-[64px] break-words overflow-hidden line-clamp-2">
       {{ agenda.title }}

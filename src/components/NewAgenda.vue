@@ -58,16 +58,16 @@
 </script>
 
 <template>
-  <div class="flex flex-col bg-[#eee] bg-opacity-10 w-[600px] gap-4 p-4 rounded-lg">
+  <div class="flex flex-col bg-[#eee] bg-opacity-10 w-full sm:w-[600px] gap-2 sm:gap-4 p-4 rounded-lg">
     <IndicatorDepth :current="beforeAgenda.depth + 1"/>
     <input
       type="text"
-      class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-2xl font-extrabold"
+      class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-sm sm:text-2xl font-extrabold"
       placeholder="Summarize why it's happening."
       v-model="title"
     >
     <textarea
-      class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg"
+      class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-sm sm:text-md"
       placeholder="Explain the reason."
       rows="5"
       v-model="content"

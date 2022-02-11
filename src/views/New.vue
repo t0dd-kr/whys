@@ -1,6 +1,7 @@
 <script setup>
   import IndicatorDepth from '@/components/Indicator/Depth.vue';
   import Button from '@/components/Button.vue';
+  import Header from '@/components/Header.vue';
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { useStore } from 'vuex'
@@ -30,16 +31,17 @@
 </script>
 
 <template>
-  <div class="flex flex-col items-center h-full justify-center fixed w-full">
-    <div class="flex justify-center text-white text-3xl mb-16 font-extrabold">
-      Write the agenda you want to know why it is happening.
+  <Header/>
+  <div class="flex flex-col items-center h-full justify-center fixed w-full px-4">
+    <div class="flex justify-center text-white text-3xl mb-16 font-extrabold w-full text-center">
+      What's going on? What's happening?
     </div>
-    <div class="flex flex-col bg-[#eee] bg-opacity-10 w-[600px] gap-4 p-4 rounded-lg">
+    <div class="flex flex-col bg-[#eee] bg-opacity-10 sm:w-[600px] gap-4 p-4 rounded-lg w-full">
       <IndicatorDepth/>
       <input
         type="text"
         class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-2xl font-extrabold"
-        placeholder="Summarize the problem."
+        placeholder="Summarize the problem here."
         v-model="title"
       >
       <textarea
