@@ -21,9 +21,7 @@
     <div class="font-extrabold text-2xl mb-2 text-ellipsis h-[64px] break-words overflow-hidden line-clamp-2">
       {{ agenda.title }}
     </div>
-    <div class="text-sm text-ellipsis h-[60px] break-words overflow-hidden line-clamp-3">
-      {{ agenda.content }}
-    </div>
+    <div class="text-sm text-ellipsis h-[60px] break-words overflow-hidden line-clamp-3" v-html="agenda.content.replaceAll('\n', '<br>')"></div>
     <div class="font-bold text-right text-xs">
       {{ agenda.author }}
     </div>
@@ -51,6 +49,6 @@
     -webkit-line-clamp: 2;
   }
   .line-clamp-3 {
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
   }
 </style>

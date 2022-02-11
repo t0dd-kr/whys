@@ -25,8 +25,7 @@
     <div class="font-extrabold text-2xl mb-2">
       {{ agenda.title }}
     </div>
-    <div class="text-sm">
-      {{ agenda.content }}
+    <div class="text-sm" v-html="agenda.content.replaceAll('\n', '<br>')">
     </div>
     <div :class="['font-bold text-right text-xs', withIndicator ? 'pb-10' : '']" v-if="withAuthor">
       {{ $store.state.users.find(user => user.id == agenda.userId)?.nickname }}

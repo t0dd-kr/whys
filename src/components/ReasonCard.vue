@@ -37,9 +37,7 @@
       <div class="font-extrabold text-lg mb-1">
         {{ agenda.title }}
       </div>
-      <div class="text-sm">
-        {{ agenda.content }}
-      </div>
+      <div class="text-sm" v-html="agenda.content.replaceAll('\n', '<br>')"></div>
     </div>
     <div class="flex justify-end items-end">
       <LikeButton :active="agenda.likeUserIds.includes($store.state.user.id)" @click="toggleLike"/>
