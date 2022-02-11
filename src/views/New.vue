@@ -31,22 +31,21 @@
 </script>
 
 <template>
-  <Header/>
   <div class="flex flex-col items-center h-full justify-center fixed w-full px-4">
     <div class="flex justify-center text-white text-3xl mb-16 font-extrabold w-full text-center">
       What's going on? What's happening?
     </div>
-    <div class="flex flex-col bg-[#eee] bg-opacity-10 sm:w-[600px] gap-4 p-4 rounded-lg w-full">
-      <IndicatorDepth/>
+    <div class="flex flex-col bg-[#eee] bg-opacity-10 sm:w-[600px] gap-2 sm:gap-4 p-4 rounded-lg w-full">
+      <IndicatorDepth :current="1"/>
       <input
         type="text"
-        class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-2xl font-extrabold"
-        placeholder="Summarize the problem here."
+        class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-sm sm:text-2xl font-extrabold"
+        placeholder="Summarize why it's happening."
         v-model="title"
       >
       <textarea
-        class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg"
-        placeholder="Explain the problem."
+        class="outline-none p-2 bg-[#eee] bg-opacity-10 text-white rounded-lg text-sm sm:text-md"
+        placeholder="Explain the reason."
         rows="5"
         v-model="content"
       />

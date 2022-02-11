@@ -1,7 +1,6 @@
 <script setup>
   import AgendaCard from '@/components/AgendaCard.vue';
   import NewAgenda from '@/components/NewAgenda.vue';
-  import Header from '@/components/Header.vue';
 
   import { computed } from 'vue'
   import { useRoute } from 'vue-router'
@@ -14,7 +13,6 @@
 </script>
 
 <template>
-  <Header/>
   <div class="flex flex-col items-center h-full justify-center fixed w-full gap-4 px-4" v-if="agenda">
     <AgendaCard :agenda="agenda"/>
     <NewAgenda :beforeAgenda="agenda" @submit="$router.push('/')"/>

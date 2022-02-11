@@ -2,8 +2,12 @@
   import IndicatorDepth from '@/components/Indicator/Depth.vue';
   import IndicatorBranch from '@/components/Indicator/Branch.vue';
   import IndicatorLike from '@/components/Indicator/Like.vue';
+  import { useStore } from 'vuex'
+  import { set } from '@/firebase'
+
+  const store = useStore()
   
-  defineProps({
+  const props = defineProps({
     agenda: {
       type: Object,
       required: true,
@@ -13,6 +17,20 @@
       default: true,
     }
   })
+
+  function likeAgenda() {
+    if(props.agenda.likeUserIds.includes(store.state.user.id)) {
+      set(`/agendas/${props.agenda.id}`, {
+        ...props.agenda,
+        likeUserIds: props.agenda.likeUserIds.filter(e => e != store.state.user.id),
+      })
+    } else {
+      set(`/agendas/${props.agenda.id}`, {
+        ...props.agenda,
+        likeUserIds: [...props.agenda.likeUserIds, store.state.user.id],
+      })
+    }
+  }
 </script>
 
 <template>
@@ -28,12 +46,12 @@
     <div class="flex justify-between" v-if="withIndicator">
       <IndicatorDepth :current="agenda.depth"/>
       <div class="flex justify-end gap-2" v-if="agenda.depth == 1">
-        <IndicatorBranch :value="$store.state.agendas.filter(a => a.rootId == agenda.id).length"/>
-        <IndicatorLike :value="$store.state.agendas.filter(a => a.rootId == agenda.id).map(a => a.likeUserIds.length).reduce((a, b) => a + b, 0)" :active="$store.state.user && agenda.likeUserIds.includes($store.state.user.id)"/>
+        <IndicatorBranch :value="$store.state.agendas.filter(a => a.rootId == agenda.id).map(e => e.childrenIds.length > 1 ? e.childrenIds.length : 0).reduce((a, b) => a + b, 0)"/>
+        <IndicatorLike :value="$store.state.agendas.filter(a => a.rootId == agenda.id).map(a => a.likeUserIds.length).reduce((a, b) => a + b, 0)" :active="true"/>
       </div>
       <div class="flex justify-end gap-2" v-else>
         <IndicatorBranch :value="agenda.childrenIds.length"/>
-        <IndicatorLike :value="agenda.likeUserIds.length"/>
+        <IndicatorLike @click.stop="likeAgenda" :value="agenda.likeUserIds.length" :active="$store.state.user && agenda.likeUserIds.includes($store.state.user.id)"/>
       </div>
     </div>
   </div>

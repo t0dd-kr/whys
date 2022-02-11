@@ -2,7 +2,6 @@
   import DraftAgendaTree from '@/components/DraftAgendaTree.vue'
   import ReasonSelector from '@/components/ReasonSelector.vue'
   import Button from '@/components/Button.vue';
-  import Header from '@/components/Header.vue';
   
   import { watch, nextTick } from 'vue'
   import { useStore } from 'vuex'
@@ -25,7 +24,6 @@
 
 <template>
   <div class="flex flex-col p-8 w-full box-border pt-24">
-    <Header/>
     <div class="flex justify-center items-center pointer-events-none w-full sm:w-auto" v-if="$store.state.currentVotingAgenda">
       <div class="pointer-events-auto flex flex-wrap gap-4 w-full sm:w-auto">
         <div class="flex flex-col gap-4 w-full sm:w-auto">

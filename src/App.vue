@@ -1,8 +1,12 @@
 <script setup>
+  import Header from '@/components/Header.vue';
 </script>
 
 <template>
-  <router-view/>
+  <div class="z-0">
+    <router-view/>
+  </div>
+  <Header/>
 </template>
 
 <style lang="scss">

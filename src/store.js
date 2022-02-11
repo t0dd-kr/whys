@@ -36,7 +36,6 @@ export default createStore({
       }
     },
     setNextCurrentVotingAgenda(state, payload) {
-      console.log(state.draftAgendas)
       state.currentVotingAgenda = state.draftAgendas.splice(Math.floor(Math.random() * state.draftAgendas.length), 1)[0]
     }
   },
